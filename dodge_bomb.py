@@ -43,9 +43,13 @@ def main():
     bd_rct = bd_img.get_rect()
     bd_rct.center = x, y
     bd_imgs =[]
+    #1~10の大きさの爆弾の作成
     for r in range(1, 11):
+            #一辺が20*rの正方形Suface
             bd_img = pg.Surface((20*r, 20*r))
+            #中心に半径10*rの赤い円を描画
             pg.draw.circle(bd_img, (255, 0, 0), (10*r, 10*r), 10*r)
+            #爆弾以外の部分にある黒を透過させる
             bd_img.set_colorkey((0, 0, 0))
             bd_imgs.append(bd_img)
 
