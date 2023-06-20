@@ -34,13 +34,20 @@ def main():
     kk_rct = kk_img.get_rect()
     kk_rct.center = 900, 400
     bd_img = pg.Surface((20, 20))
-    bd_img.set_colorkey(0, 0)
+    bd_img.set_colorkey((0, 0, 0))
+    bd_imgs = [bd_img, pg.transform.rotozoom(bd_img, 10, 1.0)]
     pg.draw.circle(bd_img, (255, 0, 0), (10, 10), 10)
     x = random.randint(0, WIDTH)
     y = random.randint(0, HEIGHT)
     vx, vy = +5, +5
     bd_rct = bd_img.get_rect()
     bd_rct.center = x, y
+    bd_imgs =[]
+    for r in range(1, 11):
+            bd_img = pg.Surface((20*r, 20*r))
+            pg.draw.circle(bd_img, (255, 0, 0), (10*r, 10*r), 10*r)
+            bd_img.set_colorkey((0, 0, 0))
+            bd_imgs.append(bd_img)
 
 
     clock = pg.time.Clock()
@@ -67,6 +74,8 @@ def main():
         screen.blit(bg_img, [0, 0])
         screen.blit(kk_img, kk_rct)
         bd_rct.move_ip(vx, vy)
+        bd_img = bd_imgs[min(tmr//500, 9)]
+
         yoko, tate = check_bound(bd_rct)
         if not yoko:  #横方向の画面外なら
             vx *= -1
@@ -75,7 +84,7 @@ def main():
         screen.blit(bd_img, bd_rct)
         pg.display.update()
         tmr += 1
-        clock.tick(50)
+        clock.tick(100)
 
 
 if __name__ == "__main__":
