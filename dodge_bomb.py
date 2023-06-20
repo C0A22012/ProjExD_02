@@ -59,6 +59,8 @@ def main():
             
         if kk_rct.colliderect(bd_rct):
             print("ゲームオーバー")
+            kk_img = pg.image.load("ex02/fig/8.png")
+            pg.time.delay(milliseconds=30): 3
             return  #　ゲームオーバー
         
         key_lst = pg.key.get_pressed()
